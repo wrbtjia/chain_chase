@@ -58,3 +58,28 @@ pub struct Investigation{
     pub types :i32,
     pub label :String,
 }
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct OverviewResp{
+    pub balance :f64,
+    pub txs_count :i32,
+    pub first_seen :i32,
+    pub last_seen :i32,
+    pub total_received :f64,
+    pub total_spent :f64,
+    pub received_txs_count :i32,
+    pub spent_txs_count :i32,
+
+}
+
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct SomeRequest{
+    pub coin: String,
+    pub address: String,
+    pub start_timestamp: i32,
+    pub end_timestamp: i32,
+    #[serde(rename = "type")]
+    pub types: String,
+    pub page: i32,
+}
