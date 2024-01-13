@@ -14,6 +14,7 @@ pub fn get_routes() -> Router {
         .nest("/user",get_user_routes())
         .nest("/api",get_api_routes())
 
+
 }
 
 async fn index() -> &'static str { "index" }

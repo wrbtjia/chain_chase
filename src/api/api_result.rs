@@ -33,6 +33,8 @@ pub enum ApiErr {
     ErrSystem(Option<String>),
     ErrData(Option<String>),
     ErrService(Option<String>),
+    ErrUser(Option<String>),
+    ErrPassword(Option<String>),
 }
 
 
@@ -49,9 +51,23 @@ impl IntoResponse for ApiErr {
                     None => Status::<()>::Err(code, String::from("参数错误")),
                 }
             }
+            ErrUser(msg) => {
+                let code = 10001;
+                match msg {
+                    Some(v) => Status::<()>::Err(code, v),
+                    None => Status::<()>::Err(code, String::from("用户不存在")),
+                }
+            }
+            ErrPassword(msg) => {
+                let code = 10002;
+                match msg {
+                    Some(v) => Status::<()>::Err(code, v),
+                    None => Status::<()>::Err(code, String::from("密码错误")),
+                }
+            }
+
             ErrAuth(msg) => {
                 let code = 20000;
-
                 match msg {
                     Some(v) => Status::<()>::Err(code, v),
                     None => Status::<()>::Err(code, String::from("未授权，请先登录")),
