@@ -13,6 +13,7 @@ pub fn get_routes() -> Router {
         .route("/", get(index))
         .nest("/user",get_user_routes())
         .nest("/api",get_api_routes())
+        .fallback(handler_404)
 
 
 }

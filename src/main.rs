@@ -3,6 +3,7 @@ mod handler;
 mod api;
 mod remote;
 mod domain;
+mod middleware;
 
 #[tokio::main]
 async fn main()  {

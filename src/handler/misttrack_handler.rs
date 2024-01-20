@@ -193,9 +193,8 @@ pub async fn get_risk_score(Query(params): Query<HashMap<String, String>>) -> Re
 
 pub async fn get_transactions_investigation(Query(args): Query<SomeRequest>) -> Result<ApiOK<Transactions>>{
 
-    println!("{:?}",args);
-
     let result = remote::get_transactions_investigation(args).await;
+    println!("{:?}",result);
     let transactions = match result {
         Ok(s) =>{
             match s.success {
@@ -203,7 +202,7 @@ pub async fn get_transactions_investigation(Query(args): Query<SomeRequest>) -> 
                     s.data.unwrap()
                 },
                 _ => {
-                    return Err(ApiErr::ErrSystem(None));
+                    return Err(ApiErr::Error(70000,s.msg));
                 }
             }
         },
